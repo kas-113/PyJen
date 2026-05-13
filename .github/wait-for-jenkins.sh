@@ -17,7 +17,7 @@ done
 
 echo 'The Jenkins is up'
 
-!/bin/bash
+#!/bin/bash
 
 #set -e
 #
