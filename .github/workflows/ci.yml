@@ -45,6 +45,14 @@ jobs:
       - name: Wait for the Jenkins
         run: ./.github/wait-for-jenkins.sh
 
+      - name: Test Jenkins auth
+        run: |
+          echo "Testing Jenkins auth..."
+          curl -v -u "$JENKINS_USERNAME:$JENKINS_PASSWORD" http://localhost:8080/api/json
+        env:
+          JENKINS_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+          JENKINS_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+
       - name: Pytest
         run: pytest -v -s
         env:
