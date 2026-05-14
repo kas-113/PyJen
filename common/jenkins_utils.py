@@ -83,7 +83,12 @@ class JenkinsUtils:
                     f'Authorization does not work with user: "{get_user_name()}"'
                 )
             if json_response.status_code != 200:
-                raise RuntimeError("Something went wrong while clearing data")
+                # raise RuntimeError("Something went wrong while clearing data")
+                raise RuntimeError(
+                    f"Crumb request failed. "
+                    f"Status={json_response.status_code}, "
+                    f"Body={json_response.body}"
+                )
 
             crumb_data = json.loads(json_response.body)
             cls._header_crumb = (crumb_data["crumbRequestField"], crumb_data["crumb"])
