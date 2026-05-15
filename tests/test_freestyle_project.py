@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 FR_PROJECT_NAME = "My Freestyle"
+FR_PROJECT_DESCRIPTION = "Freestyle project 1"
 
 def test_create_freestyle_project(browser):
     browser.find_element(By.XPATH, "//a[@href='newJob']").click()
@@ -19,22 +20,20 @@ def test_create_freestyle_project(browser):
 
 
 def test_add_description_when_configure(browser):
-    project_description = "Freestyle project 1"
     browser.find_element(By.XPATH, "//a[@href='newJob']").click()
 
     browser.find_element(By.ID, "name").send_keys(FR_PROJECT_NAME)
     browser.find_element(By.XPATH, "//span[contains(text(), 'Freestyle project')]").click()
     browser.find_element(By.ID, "ok-button").click()
 
-    browser.find_element(By.XPATH, "// textarea[ @ name = 'description']").send_keys(project_description)
+    browser.find_element(By.XPATH, "// textarea[ @ name = 'description']").send_keys(FR_PROJECT_DESCRIPTION)
     browser.find_element(By.XPATH, "//button[@value='Save']").click()
 
     description_field = browser.find_element(By.ID, "description-content").text
-    assert description_field == project_description
+    assert description_field == FR_PROJECT_DESCRIPTION
 
 
 def test_edit_description_when_configure(browser):
-    project_description = "Freestyle project 1"
     new_project_description = "New description for the product"
     browser.find_element(By.XPATH, "//a[@href='newJob']").click()
 
@@ -42,7 +41,7 @@ def test_edit_description_when_configure(browser):
     browser.find_element(By.XPATH, "//span[contains(text(), 'Freestyle project')]").click()
     browser.find_element(By.ID, "ok-button").click()
 
-    browser.find_element(By.XPATH, "// textarea[ @ name = 'description']").send_keys(project_description)
+    browser.find_element(By.XPATH, "// textarea[ @ name = 'description']").send_keys(FR_PROJECT_DESCRIPTION)
     browser.find_element(By.XPATH, "//button[@value='Save']").click()
 
     browser.find_element(By.ID, "description-link").click()
